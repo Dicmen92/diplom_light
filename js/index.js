@@ -1,10 +1,10 @@
 //popup 
 
 const togglePopup = () => {
-  const popup = document.querySelector('.popup-call'),
-  popupBtn = document.querySelectorAll('.call-btn');
+      const popup = document.querySelector('.popup-call'),
+      popupBtn = document.querySelectorAll('.call-btn');
 
-  //popup анимация
+  //-----popup анимация-----
 
   let animateOpen, 
       animateClose,
@@ -31,7 +31,7 @@ const togglePopup = () => {
         }
       };
 
-  //конец popup анимации
+  //-----конец popup анимации-----
 
   popupBtn.forEach((elem) => {
     elem.addEventListener('click', () => {
@@ -65,3 +65,87 @@ const togglePopup = () => {
 };
 
 togglePopup();
+
+
+//send-ajax-form 
+
+const sendForm = () => {
+  const errorMessage = 'ошибка',
+        loadMessage = 'идёт отправка',
+        successMessage = 'отправлено';
+
+  const mainForm = document.querySelector('.main-form'),
+        captureForm = document.querySelector('.capture-form'),
+        forms = [];
+
+  forms.push(mainForm, captureForm);
+
+  const statusMessage = document.createElement('div');
+  statusMessage.style.cssText = `font-size: 2rem;
+                                 color: red;`;
+
+  forms.forEach((item) => {
+    let input = item.querySelectorAll('input');
+    [...input].forEach((elem) => {
+      elem.addEventListener('input', () => {
+        if (elem.classList.contains('phone-user')) {
+          elem.setAttribute('maxlength', 12);
+          elem.value = elem.value.replace(/[^\+\d]/g, "");          
+        } else {          
+          elem.value = elem.value.replace(/[^А-Я]/gi, "");
+        }
+      })
+    })  
+
+  item.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = item.querySelectorAll('input');
+    item.append(statusMessage);
+    statusMessage.textContent = loadMessage;
+
+    const formData = new FormData(item);
+    let body = {};
+
+    formData.forEach((val, key) => {
+      body[key] = val;
+    });
+
+    postData(body).
+    then((response) => {
+      if (response.status !== 200){
+        input.forEach((item) => {
+          item.value = "";
+        });
+        throw new Error('status network not 200');              
+      }
+      statusMessage.textContent = successMessage;
+      if (item.classList === 'main-form' || item.classList === 'capture-form') {
+      setTimeout(() => statusMessage.textContent = '', 2000)
+      }     
+      
+      input.forEach((item) => {
+        item.value = "";
+      });
+    })
+
+    .catch((error) => {
+      statusMessage.textContent = errorMessage;
+      setTimeout(() => statusMessage.textContent = '', 4000)
+      console.error(error);
+    });
+  });
+
+  const postData = (body) => {
+    return fetch('./server.php',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/JSON'          
+      },
+      body: JSON.stringify(body)
+    });
+  };
+
+});
+};
+
+sendForm();
