@@ -46,8 +46,6 @@ elem.addEventListener('click', () => {
 })
 });
 
-
-
 popup.addEventListener('click', (event) => {    
 let target = event.target;
 
@@ -65,7 +63,6 @@ if (target.classList.contains('popup-close')) {
 };
 
 togglePopup();
-
 
 //send-ajax-form 
 
@@ -217,3 +214,71 @@ const addSentenceBtn = document.querySelector('.add-sentence-btn'),
 };
 
   addBtnLarger();
+
+  //кнопка "Заказать со скидкой", "Узнать цену со скидкой"
+
+  const togglePopupDisc = () => {
+    const discountBtn = document.querySelectorAll('.discount-btn'),
+          popupDiscount = document.querySelector('.popup-discount');
+
+    //-----popup анимация-----
+
+    let animateOpen, 
+      animateClose,
+      count = 0;   
+
+      const animateFuncOpen = () => {
+        animateOpen = requestAnimationFrame(animateFuncOpen);
+        count += 0.05;
+        if (count < 1) {
+          popupDiscount.style.opacity = count;
+        } else {
+          cancelAnimationFrame(animateOpen);
+        }
+      };
+
+      const animateFuncClose = () => {
+        animateClose = requestAnimationFrame(animateFuncClose);
+        count -= 0.05;
+        if (count >= 0) {
+          popupDiscount.style.opacity = count;
+        } else {
+          cancelAnimationFrame(animateClose);
+          popupDiscount.style.display = 'none';
+        }
+      };
+
+    //-----конец popup анимации-----   
+           
+      discountBtn.forEach((item) => {
+        item.addEventListener('click', (elem) => { 
+        if (item.classList.contains('discount-btn')){          
+          event.preventDefault();      
+          popupDiscount.style.display = 'block';
+          animateFuncOpen();
+
+          if (window.innerWidth <= 768) {
+            animateFuncClose();
+            popupDiscount.style.opacity = 1;        
+          }
+        }
+      });  
+    });
+
+    popupDiscount.addEventListener('click', (event) => {    
+      let target = event.target;
+      
+      if (target.classList.contains('popup-close')) {
+        animateClose = requestAnimationFrame(animateFuncClose);      
+      } else {
+        target = target.closest('.popup-content');  //возвращает ближайшего предка
+      
+        if (!target) {
+          animateClose = requestAnimationFrame(animateFuncClose);
+        }
+      }
+      })
+    
+  };
+
+  togglePopupDisc();
