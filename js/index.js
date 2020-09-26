@@ -159,16 +159,18 @@ const panel = document.querySelectorAll('.questions .panel-default'),
       panelAlink = document.querySelectorAll('.questions a'),      
       panelCollapse = document.querySelectorAll('.questions .panel-collapse');
 
+
       for (let i = 0; i < panel.length; i++) {        
         panelHeading[i].addEventListener('click', () => {
           event.preventDefault();    
-          let target = event.target;
-
+          let target = event.target;          
           if (target.classList.contains('collapsed')) {
-            panelCollapse[i].classList.add('in');
+            setTimeout(() => {
+            panelCollapse[i].classList.add('in');  
+          }, 300);         
             panelHeading[i].classList.remove('collapsed');
             panelTitle[i].classList.remove('collapsed');
-            panelAlink[i].classList.remove('collapsed');           
+            panelAlink[i].classList.remove('collapsed');                    
 
           }        
         })        
@@ -176,13 +178,15 @@ const panel = document.querySelectorAll('.questions .panel-default'),
       
       for (let i = 0; i  < panel.length; i++) {
         panelHeading[i].addEventListener('mouseup', () => {          
-          for (let i = 0; i < panel.length; i++) {                          
-
+          for (let i = 0; i < panel.length; i++) { 
             if (!panelHeading[i].classList.contains('collapsed')) {
-              panelCollapse[i].classList.remove('in');
+              setTimeout(() => {
+              panelCollapse[i].classList.remove('in'); 
+            }, 300);           
               panelHeading[i].classList.add('collapsed');
               panelTitle[i].classList.add('collapsed');
               panelAlink[i].classList.add('collapsed');
+            
             }            
             
           }         
