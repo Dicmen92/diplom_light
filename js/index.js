@@ -8,10 +8,9 @@ const togglePopup = () => {
 
 let animateOpen, 
   animateClose,
-  count = 0;   
-
+  count = 0;     
   const animateFuncOpen = () => {
-    animateOpen = requestAnimationFrame(animateFuncOpen);
+    animateOpen = requestAnimationFrame(animateFuncOpen);    
     count += 0.05;
     if (count < 1) {
       popup.style.opacity = count;
@@ -34,7 +33,7 @@ let animateOpen,
 //-----конец popup анимации-----
 
 popupBtn.forEach((elem) => {
-elem.addEventListener('click', () => {
+elem.addEventListener('click', () => {  
   event.preventDefault();      
   popup.style.display = 'block';
   animateFuncOpen();
@@ -46,7 +45,7 @@ elem.addEventListener('click', () => {
 })
 });
 
-popup.addEventListener('click', (event) => {    
+popup.addEventListener('click', (event) => {  
 let target = event.target;
 
 if (target.classList.contains('popup-close')) {
@@ -77,11 +76,13 @@ const mainForm = document.querySelector('main .main-form'),
       popupСall = document.querySelector('.popup-call .capture-form'),
       popupConsultation = document.querySelector('.popup-consultation .capture-form'),
       popupCheck = document.querySelector('.popup-check .capture-form'),
-      popupDiscount = document.querySelector('.popup-discount .capture-form');     
+      popupDiscount = document.querySelector('.popup-discount .capture-form'),      
+      directorForm = document.querySelector('.director-form'),
+      directorInput = document.querySelector('.director-input');
       
       forms = [];
 
-forms.push(mainForm, captureForm, popupPontent, popupСall, popupConsultation, popupCheck, popupDiscount);
+forms.push(mainForm, captureForm, popupPontent, popupСall, popupConsultation, popupCheck, popupDiscount, directorForm);
 
 const statusMessage = document.createElement('div');
 statusMessage.style.cssText = `font-size: 2rem;
@@ -93,7 +94,9 @@ let input = item.querySelectorAll('input');
   elem.addEventListener('input', () => {
     if (elem.classList.contains('phone-user')) {
       elem.setAttribute('maxlength', 12);
-      elem.value = elem.value.replace(/[^\+\d]/g, "");          
+      elem.value = elem.value.replace(/[^\+\d]/g, "");         
+    } else if (elem.classList.contains('director-input')){          
+      elem.value = elem.value.replace(/[^А-Я0-9\s,\.!?;:=#$%№()-]/gi, "");          
     } else {          
       elem.value = elem.value.replace(/[^А-Я]/gi, "");
     }
@@ -101,7 +104,7 @@ let input = item.querySelectorAll('input');
 })  
 
 item.addEventListener('submit', (e) => {
-e.preventDefault();
+e.preventDefault();  
 const input = item.querySelectorAll('input');
 item.append(statusMessage);
 statusMessage.textContent = loadMessage;
@@ -110,7 +113,11 @@ const formData = new FormData(item);
 let body = {};
 
 formData.forEach((val, key) => {
+  const directorInput = document.querySelector('.director-input');
   body[key] = val;
+  if (directorInput.value !== '') {
+    body[directorInput.getAttribute('name')] = directorInput.value;
+  }
 });
 
 postData(body).
@@ -128,24 +135,26 @@ then((response) => {
   
   input.forEach((item) => {
     item.value = "";
-    setTimeout(() => statusMessage.textContent = '', 3000)
-  });
+    setTimeout(() => statusMessage.textContent = '', 3000);
+    directorInput.value = '';
+  });  
 })
 
 .catch((error) => {
   statusMessage.textContent = errorMessage;
-  setTimeout(() => statusMessage.textContent = '', 3000)
+  setTimeout(() => statusMessage.textContent = '', 3000);
+  directorInput.value = '';
   console.error(error);
 });
 });
 
-const postData = (body) => {
+const postData = (body) => { 
 return fetch('./server.php',{
   method: 'POST',
   headers: {
     'Content-Type': 'application/JSON'          
   },
-  body: JSON.stringify(body)
+  body: JSON.stringify(body)  
 });
 };
 
@@ -391,8 +400,8 @@ const addSentenceBtn = document.querySelector('.add-sentence-btn'),
 
     //-----конец popup анимации-----              
         
-          directorBtn.addEventListener('click', (item) => { 
-                 
+      directorBtn.addEventListener('click', (item) => {
+
           event.preventDefault();      
           popupConsultation.style.display = 'block';
           animateFuncOpen();
@@ -405,15 +414,14 @@ const addSentenceBtn = document.querySelector('.add-sentence-btn'),
       });    
 
       popupConsultation.addEventListener('click', (event) => {    
-      let target = event.target;
-      
+      let target = event.target;      
       if (target.classList.contains('popup-close')) {
-        animateClose = requestAnimationFrame(animateFuncClose);      
+        animateClose = requestAnimationFrame(animateFuncClose);       
       } else {
         target = target.closest('.popup-content');  //возвращает ближайшего предка
-      
+        
         if (!target) {
-          animateClose = requestAnimationFrame(animateFuncClose);
+          animateClose = requestAnimationFrame(animateFuncClose);          
         }
       }
       })
