@@ -71,11 +71,17 @@ const errorMessage = 'ошибка',
     loadMessage = 'идёт отправка',
     successMessage = 'отправлено';
 
-const mainForm = document.querySelector('.main-form'),
-    captureForm = document.querySelector('.capture-form'),
-    forms = [];
+const mainForm = document.querySelector('main .main-form'),
+      captureForm = document.querySelector('.section-form .capture-form'),
+      popupPontent = document.querySelector('.popup-content .capture-form'),
+      popupСall = document.querySelector('.popup-call .capture-form'),
+      popupConsultation = document.querySelector('.popup-consultation .capture-form'),
+      popupCheck = document.querySelector('.popup-check .capture-form'),
+      popupDiscount = document.querySelector('.popup-discount .capture-form');     
+      
+      forms = [];
 
-forms.push(mainForm, captureForm);
+forms.push(mainForm, captureForm, popupPontent, popupСall, popupConsultation, popupCheck, popupDiscount);
 
 const statusMessage = document.createElement('div');
 statusMessage.style.cssText = `font-size: 2rem;
@@ -117,17 +123,18 @@ then((response) => {
   }
   statusMessage.textContent = successMessage;
   if (item.classList === 'main-form' || item.classList === 'capture-form') {
-  setTimeout(() => statusMessage.textContent = '', 2000)
+  setTimeout(() => statusMessage.textContent = '', 3000)
   }     
   
   input.forEach((item) => {
     item.value = "";
+    setTimeout(() => statusMessage.textContent = '', 3000)
   });
 })
 
 .catch((error) => {
   statusMessage.textContent = errorMessage;
-  setTimeout(() => statusMessage.textContent = '', 4000)
+  setTimeout(() => statusMessage.textContent = '', 3000)
   console.error(error);
 });
 });
@@ -348,3 +355,69 @@ const addSentenceBtn = document.querySelector('.add-sentence-btn'),
   };
 
   togglePopupCheck();
+
+  //кнопка "Получить консультацию" Остались вопросы
+
+  const togglePopupQuest = () => {
+    const directorBtn = document.querySelector('.director-btn'),
+    popupConsultation = document.querySelector('.popup-consultation');
+
+    //-----popup анимация-----
+
+    let animateOpen, 
+        animateClose,
+        count = 0;   
+
+      const animateFuncOpen = () => {
+        animateOpen = requestAnimationFrame(animateFuncOpen);
+        count += 0.05;
+        if (count < 1) {
+          popupConsultation.style.opacity = count;
+        } else {
+          cancelAnimationFrame(animateOpen);
+        }
+      };
+
+      const animateFuncClose = () => {
+        animateClose = requestAnimationFrame(animateFuncClose);
+        count -= 0.05;
+        if (count >= 0) {
+          popupConsultation.style.opacity = count;
+        } else {
+          cancelAnimationFrame(animateClose);
+          popupConsultation.style.display = 'none';
+        }
+      };
+
+    //-----конец popup анимации-----              
+        
+          directorBtn.addEventListener('click', (item) => { 
+                 
+          event.preventDefault();      
+          popupConsultation.style.display = 'block';
+          animateFuncOpen();
+
+          if (window.innerWidth <= 768) {
+            animateFuncClose();
+            popupConsultation.style.opacity = 1;        
+          }
+        
+      });    
+
+      popupConsultation.addEventListener('click', (event) => {    
+      let target = event.target;
+      
+      if (target.classList.contains('popup-close')) {
+        animateClose = requestAnimationFrame(animateFuncClose);      
+      } else {
+        target = target.closest('.popup-content');  //возвращает ближайшего предка
+      
+        if (!target) {
+          animateClose = requestAnimationFrame(animateFuncClose);
+        }
+      }
+      })
+    
+  };
+
+  togglePopupQuest();
