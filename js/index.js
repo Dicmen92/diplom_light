@@ -170,27 +170,26 @@ const panel = document.querySelectorAll('.questions .panel-default'),
   panelHeading = document.querySelectorAll('.questions .panel-heading'),
   panelTitle = document.querySelectorAll('.questions .panel-title'),
   panelAlink = document.querySelectorAll('.questions a'),      
-  panelCollapse = document.querySelectorAll('.questions .panel-collapse');
-
+  panelCollapse = document.querySelectorAll('.questions .panel-collapse');  
 
   for (let i = 0; i < panel.length; i++) {        
-    panelHeading[i].addEventListener('click', () => {
+    panelHeading[i].addEventListener('click', (event) => {
       event.preventDefault();    
       let target = event.target;          
       if (target.classList.contains('collapsed')) { 
         setTimeout(() => {          
-        panelCollapse[i].classList.add('in');  
+        panelCollapse[i].classList.add('in');       
       }, 200);          
         panelHeading[i].classList.remove('collapsed');
         panelTitle[i].classList.remove('collapsed');
-        panelAlink[i].classList.remove('collapsed');                    
-
+        panelAlink[i].classList.remove('collapsed'); 
       }        
     })        
   }
   
   for (let i = 0; i  < panel.length; i++) {
-    panelHeading[i].addEventListener('mouseup', () => {          
+    panelHeading[i].addEventListener('mouseup', (event) => { 
+      event.preventDefault();       
       for (let i = 0; i < panel.length; i++) { 
         if (!panelHeading[i].classList.contains('collapsed')) { 
           setTimeout(() => {        
@@ -198,8 +197,7 @@ const panel = document.querySelectorAll('.questions .panel-default'),
         }, 200);                  
           panelHeading[i].classList.add('collapsed');
           panelTitle[i].classList.add('collapsed');
-          panelAlink[i].classList.add('collapsed');
-        
+          panelAlink[i].classList.add('collapsed');        
         }            
         
       }         
@@ -438,6 +436,7 @@ const constructorСalc = () =>{
         panelCollapse = panelGroup.querySelectorAll('.panel-collapse'),        
         panelDefault = panelGroup.querySelectorAll('.panel-default'),
         linkText = panelGroup.querySelectorAll('.link-text'), 
+        checkedInput = document.querySelectorAll('.constructor .onoffswitch-checkbox'),
         popupDiscount =  document.querySelector('.popup-discount');
         
         //-----popup анимация-----
@@ -482,7 +481,7 @@ const constructorСalc = () =>{
         }
         })        
 
-        popupDiscount.addEventListener('click', (event) => {  
+        popupDiscount.addEventListener('click', () => {  
         let target = event.target;
 
         if (target.classList.contains('popup-close')) {
@@ -497,9 +496,9 @@ const constructorСalc = () =>{
         })        
           
           panelDefault.forEach((item, i) => {            
-            item.addEventListener('click', (event) => {
-                            
-              let target = event.target;
+            item.addEventListener('click', () => {
+              //event.preventDefault();                          
+              let target = event.target; 
               if (target.classList.contains('construct-btn') &&
               popupDiscount.style.display !== 'block'){                               
                 panelCollapse[i].classList.remove('in');           
@@ -507,10 +506,20 @@ const constructorСalc = () =>{
               } 
               
               if (target.classList.contains('link-text')){
-                panelCollapse[i].classList.add('in');                                
-              }              
+                panelCollapse[i].classList.add('in');                           
+              }
+              
+              /*
+              if (target.classList.contains('onoffswitch-inner') ||
+              target.classList.contains('onoffswitch-switch')) {
+                checkedInput.setAttribute('name') ;
+                console.log('получается')
+              }  
+              */
+             
             })
-            item.addEventListener('mouseup', () => {                            
+            item.addEventListener('mouseup', () => { 
+                                        
               linkText.forEach((item, i) => { 
                 let target = event.target;
                 if (!target.classList.contains('link-text')){
