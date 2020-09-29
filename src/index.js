@@ -1,5 +1,20 @@
 'use strict';
 
+import "@babel/polyfill"; 
+import "nodelist-foreach-polyfill";
+import "formdata-polyfill";
+import "es6-promise";
+import "fetch-polyfill";
+import "cross-browser-polyfill";
+import "ie11-scroll-into-view";
+import "dom-node-polyfills";
+import "promise-polyfill";
+import "apply-url";
+
+
+import elementClosest from 'element-closest';
+elementClosest(window);
+
 import togglePopup from './modules/togglePopup';
 import sendForm from './modules/sendForm';
 import collapseQuestion from './modules/collapseQuestion';
