@@ -78,7 +78,15 @@ const mainForm = document.querySelector('main .main-form'),
       popupCheck = document.querySelector('.popup-check .capture-form'),
       popupDiscount = document.querySelector('.popup-discount .capture-form'),      
       directorForm = document.querySelector('.director-form'),
-      directorInput = document.querySelector('.director-input');
+      directorInput = document.querySelector('.director-input'),
+      calcResult = document.getElementById('calc-result'),
+      onoffSwitchOne = document.getElementById('myonoffswitch'),
+      onoffSwitchTwo = document.getElementById('myonoffswitch-two'),
+      calcItem = document.getElementById('calc-item'),
+      controlOne = document.getElementById('control-one'),
+      controlTwo = document.getElementById('control-two'),
+      controlThree = document.getElementById('control-three'),        
+      controlFour = document.getElementById('control-four');
       
       forms = [];
 
@@ -111,16 +119,33 @@ statusMessage.textContent = loadMessage;
 
 const formData = new FormData(item);
 let body = {};
+let date = {};
+
+let target = event.target;
+if(target.classList.contains('modal-calc')){  
+    date.controlOne = controlOne.value;
+    date.controlTwo = controlTwo.value;
+    date.controlThree = controlThree.value;
+    date.controlFour = controlFour.value;
+    date.calcResult = calcResult.value;
+    date.onoffSwitchOne = onoffSwitchOne.value;
+    date.onoffSwitchTwo = onoffSwitchTwo.value;
+    date.calcItem = calcItem.value;         
+}
 
 formData.forEach((val, key) => {
   const directorInput = document.querySelector('.director-input');
   body[key] = val;
+
   if (directorInput.value !== '') {
     body[directorInput.getAttribute('name')] = directorInput.value;
   }
+
 });
 
-postData(body).
+let obj = Object.assign(body, date);
+
+postData(obj).
 then((response) => {
   if (response.status !== 200){
     input.forEach((item) => {
@@ -148,13 +173,13 @@ then((response) => {
 });
 });
 
-const postData = (body) => { 
+const postData = (obj) => { 
 return fetch('./server.php',{
   method: 'POST',
   headers: {
     'Content-Type': 'application/JSON'          
   },
-  body: JSON.stringify(body)  
+  body: JSON.stringify(obj)  
 });
 };
 
@@ -233,7 +258,8 @@ const addSentenceBtn = document.querySelector('.add-sentence-btn'),
 
   const togglePopupDisc = () => {
     const discountBtn = document.querySelectorAll('.discount-btn'),
-          popupDiscount = document.querySelector('.popup-discount');
+          popupDiscount = document.querySelector('.popup-discount'),
+          popupDiscountForm = popupDiscount.querySelector('.capture-form');
 
     //-----popup анимация-----
 
@@ -266,8 +292,10 @@ const addSentenceBtn = document.querySelector('.add-sentence-btn'),
            
       discountBtn.forEach((item) => {
         item.addEventListener('click', (elem) => { 
+        
         if (item.classList.contains('discount-btn')){          
-          event.preventDefault();      
+          event.preventDefault();   
+          popupDiscountForm.classList.remove('modal-calc');
           popupDiscount.style.display = 'block';
           animateFuncOpen();
 
@@ -281,7 +309,7 @@ const addSentenceBtn = document.querySelector('.add-sentence-btn'),
 
     popupDiscount.addEventListener('click', (event) => {    
       let target = event.target;
-      
+            
       if (target.classList.contains('popup-close')) {
         animateClose = requestAnimationFrame(animateFuncClose);      
       } else {
@@ -436,7 +464,6 @@ const constructorСalc = () =>{
         panelCollapse = panelGroup.querySelectorAll('.panel-collapse'),        
         panelDefault = panelGroup.querySelectorAll('.panel-default'),
         linkText = panelGroup.querySelectorAll('.link-text'), 
-        checkedInput = document.querySelectorAll('.constructor .onoffswitch-checkbox'),
         popupDiscount =  document.querySelector('.popup-discount');
         
         //-----popup анимация-----
@@ -468,7 +495,7 @@ const constructorСalc = () =>{
         //-----конец popup анимации-----
 
         
-        constructBtn.addEventListener('click', () => {  
+        constructBtn.addEventListener('click', () => {        
         event.preventDefault();      
         popupDiscount.style.display = 'block';
         panelCollapse[panelDefault.length-1].classList.remove('in');
@@ -483,13 +510,13 @@ const constructorСalc = () =>{
 
         popupDiscount.addEventListener('click', () => {  
         let target = event.target;
-
+        
         if (target.classList.contains('popup-close')) {
-        animateClose = requestAnimationFrame(animateFuncClose);      
+        animateClose = requestAnimationFrame(animateFuncClose);       
         } else {
         target = target.closest('.popup-content');  //возвращает ближайшего предка
 
-        if (!target) {
+        if (!target) {          
           animateClose = requestAnimationFrame(animateFuncClose);
         }
         }
@@ -516,7 +543,7 @@ const constructorСalc = () =>{
                 console.log('получается')
               }  
               */
-             
+
             })
             item.addEventListener('mouseup', () => { 
                                         
@@ -536,3 +563,102 @@ const constructorСalc = () =>{
       };
   
   constructorСalc();
+
+    //конструктор-калькулятор подсчеты
+
+    const calc = () => {
+      const accordion = document.getElementById('accordion'),
+          calcResult = document.getElementById('calc-result'),
+          twoWell = document.getElementById('two-well'),
+          onoffSwitchOne = document.getElementById('myonoffswitch'),
+          onoffSwitchTwo = document.getElementById('myonoffswitch-two'),
+          twoWellBox = document.getElementById('two-well-box'),
+          twoWellBoxTwo = document.getElementById('two-well-box-two'),
+          calcItem = document.getElementById('calc-item'),
+          controlOne = document.getElementById('control-one'),
+          controlTwo = document.getElementById('control-two'),
+          controlThree = document.getElementById('control-three'),
+          controlFour = document.getElementById('control-four'),
+          discountBtn = document.getElementById('discount-btn'),
+          popUp = document.querySelector('.popup-discount .capture-form');
+  
+              twoWell.style.display = 'none';
+              twoWellBox.style.display = 'none';
+              twoWellBoxTwo.style.display = 'none';
+              calcResult.value = '10000'; 
+         
+          // Функция подсчета
+          const countSum = () => {
+              let total = 0,
+                  totam = 0,
+                  swithOne = 0,
+                  bottom = 0,
+                  valueControlOne = 0,
+                  valueControlTwo = 0,
+                  valueControlThree = 0,
+                  valueControlFour = 0;
+  
+                  
+              // Блок тип септика
+              if(onoffSwitchOne.checked){
+                  swithOne += 10000;
+                  twoWell.style.display = 'none';
+                  twoWellBox.style.display = 'none';
+                  twoWellBoxTwo.style.display = 'none';   
+              }else{
+                  swithOne += 15000;
+                  twoWell.style.display = 'inline-block';
+                  twoWellBox.style.display = 'inline-block';
+                  twoWellBoxTwo.style.display = 'inline-block'; 
+              }
+             
+              //Блок первый колодец
+            if(controlOne.value && controlOne.value == 2){
+              valueControlOne += (swithOne * 0.2);
+          }
+          //Блок второй колодец
+          if(controlTwo.value && controlTwo.value == 2){
+              valueControlTwo += (valueControlOne + swithOne) * 0.3;              
+          }else if(controlTwo.value && controlTwo.value == 3){
+              valueControlTwo += (valueControlOne + swithOne) * 0.5;
+          }
+          //Блок третий колодец
+          if(controlThree.value && controlThree.value == 2){
+              valueControlThree += (swithOne / 100 )* 20;
+          }
+          //Блок четвертый колодец
+          if(controlFour.value && controlFour.value == 2){
+              valueControlFour += (swithOne / 100 )* 20;
+          }else if(controlFour.value && controlFour.value == 3){
+              valueControlFour += (swithOne / 100 )* 40;
+          }
+          
+          //Блок днище колодца
+          if(onoffSwitchTwo.checked && onoffSwitchOne.checked){
+              totam = valueControlOne + valueControlTwo + swithOne;
+              bottom += totam * 0.1;
+          }else if(onoffSwitchTwo.checked && onoffSwitchOne.checked === false) {
+            totam = valueControlOne + valueControlTwo + swithOne;
+            bottom += totam * 0.2;
+          }
+          //Подсчет результата
+          total =  valueControlOne + valueControlTwo + valueControlThree + valueControlFour + swithOne + bottom;
+
+          //Вывод результата в input
+          calcResult.value = total;  
+
+          calcItem.addEventListener('input', function () {
+              this.value = this.value.replace(/[^0-9\.]/, '');
+          });
+      };
+             
+      accordion.addEventListener('input', countSum);
+      
+      discountBtn.addEventListener('click', () => {
+          
+          popUp.classList.add('modal-calc');
+           
+      });    
+};
+
+  calc();

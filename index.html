@@ -124,150 +124,150 @@
 </section>
 
 <section class="constructor">
-    <div class="container">
-        <div class="row">
-            <h2>Онлайн конструктор септика</h2>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="container">
+      <div class="row">
+          <h2>Онлайн конструктор септика</h2>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-                    <div class="panel panel-default panel-one wow fadeInLeft">
-                        <div class="panel-heading" role="tab" id="headingOne">
-                            <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                                   aria-expanded="true" aria-controls="collapseOne">
-                                    <span class="link-text">1. Тип септика</span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
-                             aria-labelledby="headingOne">
-                            <div class="panel-body">
-                                <img class="type-septic" src="img/constructor/type-septic.png" alt="septic">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
-                                           id="myonoffswitch" checked>
-                                    <label class="onoffswitch-label" for="myonoffswitch">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                                <img class="type-septic" src="img/constructor/type-septic-two.png" alt="septic">
-                                <p>камерный</p>
-                                <a class="button construct-btn collapsed" data-toggle="collapse"
-                                   data-parent="#accordion" href="#collapseTwo"><span>Следующий шаг</span></a>
-                            </div>
-                        </div>
-                    </div>
+                  <div class="panel panel-default panel-one wow fadeInLeft">
+                      <div class="panel-heading" role="tab" id="headingOne">
+                          <h4 class="panel-title">
+                              <a role="button" data-toggle="collapse" data-parent="#accordion" 
+                                 aria-expanded="true" aria-controls="collapseOne">
+                                  <span class="link-text">1. Тип септика</span>
+                              </a>
+                          </h4>
+                      </div>
+                      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                           aria-labelledby="headingOne">
+                          <div class="panel-body">
+                              <img class="type-septic" src="img/constructor/type-septic.png" alt="septic">
+                              <div class="onoffswitch">
+                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                                         id="myonoffswitch" checked>
+                                  <label class="onoffswitch-label" for="myonoffswitch">
+                                      <span class="onoffswitch-inner"></span>
+                                      <span class="onoffswitch-switch"></span>
+                                  </label>
+                              </div>
+                              <img class="type-septic" src="img/constructor/type-septic-two.png" alt="septic">
+                              <p>камерный</p>
+                              <a class="button construct-btn collapsed" data-toggle="collapse"
+                                 data-parent="#accordion"><span>Следующий шаг</span></a>
+                          </div>
+                      </div>
+                  </div>
 
-                    <div class="panel panel-default panel-two wow fadeInRight" data-wow-delay="0.1s">
-                        <div class="panel-heading" role="tab" id="headingTwo">
-                            <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <span class="link-text">2. Диаметр и количество колец</span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
-                             aria-labelledby="headingTwo">
-                            <div class="panel-body">
+                  <div class="panel panel-default panel-two wow fadeInRight" data-wow-delay="0.1s">
+                      <div class="panel-heading" role="tab" id="headingTwo">
+                          <h4 class="panel-title">
+                              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                  aria-expanded="false" aria-controls="collapseTwo">
+                                  <span class="link-text">2. Диаметр и количество колец</span>
+                              </a>
+                          </h4>
+                      </div>
+                      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                           aria-labelledby="headingTwo">
+                          <div class="panel-body">
 
-                                <div class="title-text">первый колодец (приемный)</div>
-                                <div class="select-box">
-                                    <p><strong>Диаметр</strong></p>
-                                    <select class="form-control expand">
-                                        <option>1.4 метра</option>
-                                        <option>2 метра</option>
-                                    </select>
-                                </div>
-                                <div class="select-box">
-                                    <p><strong>Количество колец</strong></p>
-                                    <select class="form-control expand">
-                                        <option>1 штука</option>
-                                        <option>2 штуки</option>
-                                        <option>3 штуки</option>
-                                    </select>
-                                </div>
+                              <div class="title-text">первый колодец (приемный)</div>
+                              <div class="select-box">
+                                  <p><strong>Диаметр</strong></p>
+                                  <select class="form-control expand" id="control-one">
+                                      <option value="1.4">1.4 метра</option>
+                                      <option value="2">2 метра</option>
+                                  </select>
+                              </div>
+                              <div class="select-box">
+                                  <p><strong>Количество колец</strong></p>
+                                  <select class="form-control expand" id="control-two">
+                                      <option value="1">1 штука</option>
+                                      <option value="2">2 штуки</option>
+                                      <option value="3">3 штуки</option>
+                                  </select>
+                              </div>
 
-                                <div class="title-text">второй колодец (дренажный)</div>
-                                <div class="select-box">
-                                    <p><strong>Диаметр</strong></p>
-                                    <select class="form-control expand">
-                                        <option>1.4 метра</option>
-                                        <option>2 метра</option>
-                                    </select>
-                                </div>
-                                <div class="select-box">
-                                    <p><strong>Количество колец</strong></p>
-                                    <select class="form-control expand">
-                                        <option>1 штука</option>
-                                        <option>2 штуки</option>
-                                        <option>3 штуки</option>
-                                    </select>
-                                </div>
-                                <a class="button construct-btn" data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapseThree"><span>Следующий шаг</span></a>
-                            </div>
-                        </div>
-                    </div>
+                              <div class="title-text" id="two-well">второй колодец (дренажный)</div>
+                              <div class="select-box" id="two-well-box">
+                                  <p><strong>Диаметр</strong></p>
+                                  <select class="form-control expand" id="control-three">
+                                      <option value="1.4">1.4 метра</option>
+                                      <option value="2">2 метра</option>
+                                  </select>
+                              </div>
+                              <div class="select-box" id="two-well-box-two">
+                                  <p><strong>Количество колец</strong></p>
+                                  <select class="form-control expand" id="control-four">
+                                      <option value="1">1 штука</option>
+                                      <option value="2">2 штуки</option>
+                                      <option value="3">3 штуки</option>
+                                  </select>
+                              </div>
+                              <a class="button construct-btn" data-toggle="collapse" data-parent="#accordion"
+                                 ><span>Следующий шаг</span></a>
+                          </div>
+                      </div>
+                  </div>
 
-                    <div class="panel panel-default panel-three wow fadeInLeft" data-wow-delay="0.2s">
-                        <div class="panel-heading" role="tab" id="headingThree">
-                            <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    <span class="link-text">3. Наличие днища колодца</span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
-                             aria-labelledby="headingThree">
-                            <div class="panel-body">
-                                </p>
+                  <div class="panel panel-default panel-three wow fadeInLeft" data-wow-delay="0.2s">
+                      <div class="panel-heading" role="tab" id="headingThree">
+                          <h4 class="panel-title">
+                              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                  aria-expanded="false" aria-controls="collapseThree">
+                                  <span class="link-text">3. Наличие днища колодца</span>
+                              </a>
+                          </h4>
+                      </div>
+                      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                           aria-labelledby="headingThree">
+                          <div class="panel-body">
+                              </p>
 
-                                <div class="onoffswitch">
-                                    <input type="checkbox" name="onoffswitch-two" class="onoffswitch-checkbox"
-                                           id="myonoffswitch-two" checked>
-                                    <label class="onoffswitch-label" for="myonoffswitch-two">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                                <img class="bottom-septic-img" src="img/constructor/bottom-septic.png" alt="bs">
-                                <a class="button construct-btn" data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapseFour" aria-expanded="false" aria-controls="collapseFour"><span>Следующий шаг</span></a>
-                            </div>
-                        </div>
-                    </div>
+                              <div class="onoffswitch">
+                                  <input type="checkbox" name="onoffswitch-two" class="onoffswitch-checkbox"
+                                         id="myonoffswitch-two">
+                                  <label class="onoffswitch-label" for="myonoffswitch-two">
+                                      <span class="onoffswitch-inner"></span>
+                                      <span class="onoffswitch-switch"></span>
+                                  </label>
+                              </div>
+                              <img class="bottom-septic-img" src="img/constructor/bottom-septic.png" alt="bs">
+                              <a class="button construct-btn" data-toggle="collapse" data-parent="#accordion"
+                                  aria-expanded="false" aria-controls="collapseFour"><span>Следующий шаг</span></a>
+                          </div>
+                      </div>
+                  </div>
 
-                    <div class="panel panel-default panel-four wow fadeInRight" data-wow-delay="0.3s">
-                        <div class="panel-heading" role="tab" id="headingFour">
-                            <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    <span class="link-text">4. Расстояние от септика до дома</span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
-                             aria-labelledby="headingFour">
-                            <div class="panel-body">
-                                <p>Введите расстояние до дома</p>
-                                <input type="text">
-                                <button class="button construct-btn construct-btn_button call-btn">Получить расчет и скидку</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                  <div class="panel panel-default panel-four wow fadeInRight" data-wow-delay="0.3s">
+                      <div class="panel-heading" role="tab" id="headingFour">
+                          <h4 class="panel-title">
+                              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                  aria-expanded="false" aria-controls="collapseFour">
+                                  <span class="link-text">4. Расстояние от септика до дома</span>
+                              </a>
+                          </h4>
+                      </div>
+                      <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
+                           aria-labelledby="headingFour">
+                          <div class="panel-body">
+                              <p>Введите расстояние до дома</p>
+                              <input type="text" id="calc-item">
+                              <button class="button construct-btn construct-btn_button call-btn" id="discount-btn">Получить расчет и скидку</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
 
-            <div class="col-lg-6 col-md-6 col-sm-6 wow fadeInRight">
-                <img class="tank-img" src="img/constructor/septic-tank.png" alt="tank">
-                <input id="calc-result" type="text" placeholder="примерная стоимость" disabled>
-            </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 wow fadeInRight">
+              <img class="tank-img" src="img/constructor/septic-tank.png" alt="tank">
+              <input id="calc-result" type="text" placeholder="примерная стоимость" disabled>
+          </div>
 
-        </div>
-    </div>
+      </div>
+  </div>
 </section>
 
 <section class="sentence">
