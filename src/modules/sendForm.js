@@ -4,7 +4,8 @@ const sendForm = () => {
       successMessage = 'отправлено',
       phoneMessage = 'введите корректный номер телефона';
   
-  const popupСall = document.querySelector('.popup-call .capture-form'),
+  const popup = document.querySelectorAll('.popup'),
+        popupСall = document.querySelector('.popup-call .capture-form'),
         popupDiscount = document.querySelector('.popup-discount .capture-form'),
         popupCheck = document.querySelector('.popup-check .capture-form'),
         popupConsultation = document.querySelector('.popup-consultation .capture-form'), 
@@ -20,8 +21,10 @@ const sendForm = () => {
         controlTwo = document.getElementById('control-two'),
         controlThree = document.getElementById('control-three'),        
         controlFour = document.getElementById('control-four'), 
-        button = document.querySelectorAll('.popup-form-btn'),  
-        phoneUser = document.querySelectorAll('.phone-user'),      
+        button = document.querySelectorAll('.popup-form-btn'), 
+        
+        
+        
         forms = [];
   
   forms.push(mainForm, captureForm, popupСall, popupConsultation, popupCheck, popupDiscount, directorForm);
@@ -36,7 +39,7 @@ const sendForm = () => {
   forms.forEach((item, i) => {
   let input = item.querySelectorAll('input');
   [...input].forEach((elem) => {
-    elem.addEventListener('input', () => {
+    elem.addEventListener('input', () => {            
       if (elem.classList.contains('phone-user')) {
         elem.setAttribute('maxlength', 12);
         elem.value = elem.value.replace(/[^\+\d]/g, "");        
@@ -65,7 +68,7 @@ const sendForm = () => {
   })  
   
   item.addEventListener('submit', (e) => {
-  e.preventDefault();  
+  e.preventDefault();
   const input = item.querySelectorAll('input');
   item.append(statusMessage);
   statusMessage.textContent = loadMessage;
@@ -100,30 +103,83 @@ const sendForm = () => {
   
   postData(obj).
   then((response) => {
+    // закрытие popub после отправки формы
+    popup.forEach((item) => {
+      item.style.display = 'none';      
+      })    
+            
+    // обнуление калькулятора-аккордеона
+      if(target.classList.contains('modal-calc')){
+        const onoffSwitchOne = document.getElementById('myonoffswitch'),
+              twoWell = document.getElementById('two-well'),
+              twoWellBox = document.getElementById('two-well-box'),
+              twoWellBoxTwo = document.getElementById('two-well-box-two'),
+              onoffswitchCheckbox = document.getElementById('myonoffswitch-two'),
+              formControlRings = document.querySelectorAll('.form-control-rings'),
+              formControlDiameter = document.querySelectorAll('.form-control-diameter');
+
+        input.forEach((item) => {
+          item.value = "";        
+        });  
+
+        formControlRings.forEach((item, i) => {
+          if (item.value === '1' || item.value === '2' || item.value === '3'){
+            item.value = '1';            
+          } 
+        })
+
+        formControlDiameter.forEach((item, i) => {
+          if (item.value === '1.4' || item.value === '2'){
+            item.value = '1.4';            
+          } 
+        })
+
+          twoWell.style.display = 'none';
+          twoWellBox.style.display = 'none';
+          twoWellBoxTwo.style.display = 'none';
+          calcResult.value = '10000'; 
+          onoffSwitchOne.checked = true;
+          onoffswitchCheckbox.checked = false;
+          calcItem.value = '';
+
+          const countSum = () => {
+            let total = 0,
+                totam = 0,
+                bottom = 0,
+                valueControlOne = 0,
+                valueControlTwo = 0,
+                valueControlThree = 0,
+                valueControlFour = 0;
+                swithOne += 10000;
+                calcResult.value = total;
+          }
+        }        
+
     if (response.status !== 200){
       input.forEach((item) => {
-        item.value = "";
+        item.value = "";        
       });
       throw new Error('status network not 200');              
     }
+
     statusMessage.textContent = successMessage;
-    if (item.classList === 'main-form' || item.classList === 'capture-form') {
+    if (item.classList === 'main-form' || item.classList === 'capture-form') {    
     setTimeout(() => statusMessage.textContent = '', 3000)
     }     
     
     input.forEach((item) => {
       item.value = "";
       setTimeout(() => statusMessage.textContent = '', 3000);
-      directorInput.value = '';
-    });  
+      directorInput.value = '';           
+    });      
   })
   
-  .catch((error) => {
+  .catch((error) => {    
     statusMessage.textContent = errorMessage;
     setTimeout(() => statusMessage.textContent = '', 3000);
     directorInput.value = '';
-    console.error(error);
-  });
+    console.error(error);       
+  });  
   });
   
   const postData = (obj) => { 

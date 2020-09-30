@@ -4,7 +4,8 @@ const constructorСalc = () =>{
         panelCollapse = panelGroup.querySelectorAll('.panel-collapse'),        
         panelDefault = panelGroup.querySelectorAll('.panel-default'),
         linkText = panelGroup.querySelectorAll('.link-text'), 
-        popupDiscount =  document.querySelector('.popup-discount');
+        popupDiscount =  document.querySelector('.popup-discount'),
+        popUp = document.querySelector('.popup-discount .capture-form');
         
         //-----popup анимация-----
 
@@ -29,6 +30,7 @@ const constructorСalc = () =>{
           } else {
             cancelAnimationFrame(animateClose);
             popupDiscount.style.display = 'none';
+            //popUp.classList.remove('modal-calc');
           }
         };
 
