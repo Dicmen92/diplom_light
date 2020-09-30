@@ -10,7 +10,7 @@ import "ie11-scroll-into-view";
 import "dom-node-polyfills";
 import "promise-polyfill";
 import "apply-url";
-
+import "core-js";
 
 import elementClosest from 'element-closest';
 elementClosest(window);

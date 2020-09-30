@@ -1,7 +1,8 @@
 const sendForm = () => {
   const errorMessage = 'ошибка',
       loadMessage = 'идёт отправка',
-      successMessage = 'отправлено';
+      successMessage = 'отправлено',
+      phoneMessage = 'введите корректный номер телефона';
   
   const mainForm = document.querySelector('main .main-form'),
         captureForm = document.querySelector('.section-form .capture-form'),
@@ -19,7 +20,8 @@ const sendForm = () => {
         controlOne = document.getElementById('control-one'),
         controlTwo = document.getElementById('control-two'),
         controlThree = document.getElementById('control-three'),        
-        controlFour = document.getElementById('control-four'),      
+        controlFour = document.getElementById('control-four'), 
+        button = document.querySelectorAll('.button'),     
         forms = [];
   
   forms.push(mainForm, captureForm, popupPontent, popupСall, popupConsultation, popupCheck, popupDiscount, directorForm);
@@ -27,14 +29,32 @@ const sendForm = () => {
   const statusMessage = document.createElement('div');
   statusMessage.style.cssText = `font-size: 2rem;
                                color: red;`;
+  const telMessage = document.createElement('div');
+  telMessage.style.cssText = `font-size: 2rem;
+                               color: red;`;
   
-  forms.forEach((item) => {
+  forms.forEach((item, i) => {
   let input = item.querySelectorAll('input');
   [...input].forEach((elem) => {
     elem.addEventListener('input', () => {
       if (elem.classList.contains('phone-user')) {
         elem.setAttribute('maxlength', 12);
-        elem.value = elem.value.replace(/[^\+\d]/g, "");         
+        elem.value = elem.value.replace(/[^\+\d]/g, ""); 
+
+          if (elem.value === '') {
+
+          } else if (elem.value.length < 10){
+          button[i].setAttribute('disabled', true);          
+          button[i].style.cursor = 'pointer';
+          telMessage.textContent = phoneMessage;   
+          item.append(telMessage);  
+          setTimeout(() => telMessage.textContent = '', 3000);
+        } else if (elem.value.length === 10 ||
+          elem.value.length > 10){
+          button[i].removeAttribute('disabled');
+          telMessage.textContent = '';
+        }      
+
       } else if (elem.classList.contains('director-input')){          
         elem.value = elem.value.replace(/[^А-Я0-9\s,\.!?;:=#$%№()-]/gi, "");          
       } else {          
