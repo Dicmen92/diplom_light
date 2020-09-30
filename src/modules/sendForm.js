@@ -39,9 +39,7 @@ const sendForm = () => {
     elem.addEventListener('input', () => {
       if (elem.classList.contains('phone-user')) {
         elem.setAttribute('maxlength', 12);
-        elem.value = elem.value.replace(/[^\+\d]/g, ""); 
-        
-        
+        elem.value = elem.value.replace(/[^\+\d]/g, "");        
 
           if (elem.value === '') {
                         
@@ -56,9 +54,7 @@ const sendForm = () => {
           elem.value.length > 10){
           button[i].removeAttribute('disabled');
           telMessage.textContent = '';
-        } 
-
-        
+        }         
 
       } else if (elem.classList.contains('director-input')){       
         elem.value = elem.value.replace(/[^А-Я0-9\s,\.!?;:=#$%№()-]/gi, "");          
