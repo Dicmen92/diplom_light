@@ -51,6 +51,7 @@ const sendForm = () => {
           telMessage.textContent = phoneMessage;   
           item.append(telMessage);            
           //setTimeout(() => telMessage.textContent = '', 5000);
+          
         } else if (elem.value.length === 10 ||
           elem.value.length > 10){
           button[i].removeAttribute('disabled');
