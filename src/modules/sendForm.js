@@ -4,13 +4,12 @@ const sendForm = () => {
       successMessage = 'отправлено',
       phoneMessage = 'введите корректный номер телефона';
   
-  const mainForm = document.querySelector('main .main-form'),
-        captureForm = document.querySelector('.section-form .capture-form'),
-        popupPontent = document.querySelector('.popup-content .capture-form'),
-        popupСall = document.querySelector('.popup-call .capture-form'),
-        popupConsultation = document.querySelector('.popup-consultation .capture-form'),
+  const popupСall = document.querySelector('.popup-call .capture-form'),
+        popupDiscount = document.querySelector('.popup-discount .capture-form'),
         popupCheck = document.querySelector('.popup-check .capture-form'),
-        popupDiscount = document.querySelector('.popup-discount .capture-form'),      
+        popupConsultation = document.querySelector('.popup-consultation .capture-form'), 
+        mainForm = document.querySelector('main .main-form'),
+        captureForm = document.querySelector('.section-form .capture-form'),             
         directorForm = document.querySelector('.director-form'),
         directorInput = document.querySelector('.director-input'),
         calcResult = document.getElementById('calc-result'),
@@ -21,10 +20,11 @@ const sendForm = () => {
         controlTwo = document.getElementById('control-two'),
         controlThree = document.getElementById('control-three'),        
         controlFour = document.getElementById('control-four'), 
-        button = document.querySelectorAll('.button'),     
+        button = document.querySelectorAll('.popup-form-btn'),  
+        phoneUser = document.querySelectorAll('.phone-user'),      
         forms = [];
   
-  forms.push(mainForm, captureForm, popupPontent, popupСall, popupConsultation, popupCheck, popupDiscount, directorForm);
+  forms.push(mainForm, captureForm, popupСall, popupConsultation, popupCheck, popupDiscount, directorForm);
   
   const statusMessage = document.createElement('div');
   statusMessage.style.cssText = `font-size: 2rem;
@@ -40,25 +40,31 @@ const sendForm = () => {
       if (elem.classList.contains('phone-user')) {
         elem.setAttribute('maxlength', 12);
         elem.value = elem.value.replace(/[^\+\d]/g, ""); 
+        
+        
 
           if (elem.value === '') {
-
+                        
           } else if (elem.value.length < 10){
           button[i].setAttribute('disabled', true);          
           button[i].style.cursor = 'pointer';
           telMessage.textContent = phoneMessage;   
           item.append(telMessage);  
-          setTimeout(() => telMessage.textContent = '', 3000);
+          console.log(button[i]);
+          console.log(i);
+          //setTimeout(() => telMessage.textContent = '', 5000);
         } else if (elem.value.length === 10 ||
           elem.value.length > 10){
           button[i].removeAttribute('disabled');
           telMessage.textContent = '';
-        }      
+        } 
 
-      } else if (elem.classList.contains('director-input')){          
+        
+
+      } else if (elem.classList.contains('director-input')){       
         elem.value = elem.value.replace(/[^А-Я0-9\s,\.!?;:=#$%№()-]/gi, "");          
       } else {          
-        elem.value = elem.value.replace(/[^А-Я]/gi, "");
+        elem.value = elem.value.replace(/[^А-Я]/gi, "");        
       }
     })
   })  
