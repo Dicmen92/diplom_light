@@ -49,9 +49,7 @@ const sendForm = () => {
           button[i].setAttribute('disabled', true);          
           button[i].style.cursor = 'pointer';
           telMessage.textContent = phoneMessage;   
-          item.append(telMessage);  
-          console.log(button[i]);
-          console.log(i);
+          item.append(telMessage);            
           //setTimeout(() => telMessage.textContent = '', 5000);
         } else if (elem.value.length === 10 ||
           elem.value.length > 10){
